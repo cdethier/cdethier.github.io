@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    font-family: Gill Sans, sans-serif; 
+}
+
+h1 {
+    font-size: 25px;
+}
+
+h2 {
+    font-size: 15px;
+}
+
+p {
+    font-size: 13px;
+}
+
+body {
+    margin: 0;
+    font-family: Gill Sans, sans-serif;
+}
+
+/* Style the side navigation */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+}
+
+
+/* Side navigation links */
+.sidenav a {
+    background-color: rgb(0,110,110);
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Style the content */
+.content {
+    margin-left: 200px;
+    padding-left: 20px;
+}
+
+/* This is the header */
+.header {
+    margin-left: 200px;
+    padding: 20px;
+}
