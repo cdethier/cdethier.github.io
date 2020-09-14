@@ -1,0 +1,240 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb, enumerate, amsmath, amsthm}
+\usepackage{graphics}
+\usepackage{txfonts}
+
+\newcommand{\problem}[1]{\bigskip \noindent \textbf{Problem #1}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}{Question}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{example*}{Example}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{nonexample*}{Non-Example}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{8.7in}
+\title{McDonald Exercises, Chapter 1}
+\author{Christophe Dethier}
+\date{$\substack{\text{Created August 30, 2020}\\\text{Last edited \today}}$}
+\begin{document}
+\bigskip
+\maketitle
+
+Please contact me at christophehldethier@gmail.com with any questions, comments, or corrections.
+
+\problem{1.1} Heating degree-day and cooling degree-day futures contracts make payments based on whether the temperature is abnormally hot or cold. Explain why the following businesses might be interested in such a contract.
+
+\begin{enumerate}[(a)]
+ 
+\item Soft-drink manufacturers.
+
+Demand for soft drinks decreases when as the temperature decreases. Therefore, a soft-drink manufacturer would be interested in a cooling degree-day futures contract to offset their losses when temperature cool.
+
+\item Ski-resort operators.
+
+When temperatures are high, snow melts and ski resorts are therefore unable to generate revenue. A ski resort operator might therefore want a heating degree-day futures contract to offset losses when temperatures rise.
+
+\item Electric Utilities.
+
+When temperatures rise, residents will increase their use of air conditioning, increasing their electricity consumption. This causes a decrease in revenue for electrical utilities. Therefore, an electrical utility would be interested in a heating degree-day futures contract to offset their losses in these circumstances.
+
+On the other hand, when temperature cool, residents will increase their use of electric heating. This causes a decrease in revenue for electrical utilities. Therefore, an electrical utility would be interested in a cooling degree-day futures contract to offset their losses in this scenario. One suspects that the need for cooling degree-day futures contracts would be less than that for heating degree-day futures contracts as some residents use natural gas heating systems.
+
+\item Amusement park operators.
+
+When temperatures cool, amusement parks receive less customers. Particularly when cooling temperatures are coupled with increased precipitation. This decreases revenue for amusement park operators. An amusement park operator would therefore want a cooling degree-day futures contract to offset losses when temperatures cool.
+
+\end{enumerate}
+
+\problem{1.2} Suppose the businesses in the previous problem use futures contracts to hedge their temperature-related risk. Who do you think might accept the opposite risk?\\
+
+Although it's tempting to say that ski-resort operators and amusement park operators would enter into an agreement to accept opposite risk as their businesses seem to be opposite in some sense. However, Amusement park operators are concerned with unusually cool summers, which do not benefit ski-resort operators. On the other hand ski resort operators are concerned by unusually warm winters, which do not benefit amusement park operators.
+
+I would suspect that electric utilities would be willing to share risk with soft-drink manufacturers, ski-resort operators, and amusement park operators. Cool summers benefit electric utilities, but concern soft-drink manufacturers and amusement park operators, while warm winters harm ski-resort operators and benefit electric utilities.
+
+\problem{1.3} ABC stock has a bid price of \$40.95 and an ask price of \$41.05. Assume there is a \$20 brokerage commission.
+
+\begin{enumerate}[(a)]
+\item What amount will you pay to buy 100 shares?
+
+You will pay
+\[
+\$20 + 100 \cdot \$41.05 = \$4,125
+\]
+to buy 100 shares.
+
+\item What amount will you receive for selling 100 shares?
+
+Selling 100 shares will give you
+\[
+100\cdot \$40.95 - 29 = \$4,075.
+\]
+
+\item Suppose you buy 100 shares, then immediately sell 100 shares with the bid and ask prices being the same in both cases. What is your round-trip transaction cost?
+
+Your round-trip transaction cost is
+\[
+\$4,125 - \$4,095 = \$50.
+\]
+\end{enumerate}
+
+\problem{1.4} Repeat the previous problem supposing that the brokerage fee is quoted as 0.3\% of the bid or ask price.
+
+\begin{enumerate}[(a)]
+\item What amount will you pay to buy the 100 shares?
+
+You will pay
+\[
+1.003 \cdot 100 \cdot \$41.05 = \$4,117.32
+\]
+to purchase the 100 shares.
+
+\item What amount will you receive for selling 100 shares?
+
+Selling 100 shares will give you
+\[
+0.997 \cdot 100 \cdot \$40.95 = \$4,082.72.
+\]
+
+\item Suppose you buy 100 shares, then immediately sell 100 shares with the bid and ask prices being the same in both cases. What is your round-trip transaction cost?
+
+Your round-trip transaction cost is
+\[
+\$4,117.32 - \$4,082.72 = \$34.6
+\]
+\end{enumerate}
+
+\problem{1.5} Suppose a security has a bid price of \$100 and an ask price of \$100.12. At what price can the market-maker purchase a security? At what price can the market-maker sell a security? What is the spread in dollar terms when 100 shares are traded?\\
+
+The market-maker purchases a security for \$100 and sells securities for \$100.13. When 100 shares are traded, the spread is
+\[
+100 \cdot \$100.13 - 100 \cdot \$100 = \$13.
+\]
+
+\problem{1.6} Suppose you short-sell 300 shares of XYZ stock at \$30.19 with a commission charge of 0.5\%. Supposing you pay commission charges for purchasing the security to cover the short-sale, how much profit have you made if you close the short-sale at a price of \$29.87?\\
+
+You have made
+\[
+300 \cdot 0.995 \cdot \$30.19 - 300 \cdot 1.005 \cdot \$29.87 = \$9,011.72 - \$8,987.88 = \$23.84
+\]
+in profit.
+
+\problem{1.7} Suppose you desire to short-sell 400 shares of JKI stock, which has a bid price of \$25.12 and an ask price of \$25.31. You cover the short position 180 days later when the bid price is \$22.87 and the ask price is \$23.06.
+
+\begin{enumerate}[(a)]
+\item Taking into account only the bid and ask prices (ignoring commissions and interest), what profit did you earn?
+
+You earned
+\[
+400 \cdot \$25.12 - 400 \cdot \$23.06 = \$824,
+\]
+not taking into account commissions and interest.
+
+\item Suppose that there is a 0.3\% commission to engage in short-sale (this is the commission to sell the stock) and a 0.3\% commission to close the short-sale (this is the commission to buy the stock back). How do these commissions change the profit in the previous answer?
+
+You earned
+\[
+400 \cdot 0.997 \$25.12 - 400 \cdot 1.003 \cdot \$23.06 = \$10,017.86 - \$9,251.67 = \$766.19
+\]
+in profit taking into account commission fees.
+
+\item Suppose the 6-month interest rate is 3\% and that you are paid nothing on the short-sale proceeds. How much interest do you lose during the 6 months in which you have the short position?
+
+You lose
+\[
+0.03 \cdot 400 \cdot \$25.12 = \$301.44
+\]
+in interest.
+\end{enumerate}
+
+\problem{1.8} When you open a brokerage account, you typically sign an agreement giving the broker the right to lend your shares without notifying or compensating you. Why do brokers want you to sign this agreement?\\
+
+Brokers would like you to sign this agreement so that they can lend your shares. They do this because they can charge interest and fees to short-sellers to make revenue on your investments. 
+
+\problem{1.9} Suppose a stock pays a quarterly dividend of \$3. You plan to hold a short position in the stock across the dividend ex-date. What is your obligation on that date? If you are a taxable investor, what would you guess is the tax consequence of the payment? (In particular, would you expect the dividend to be tax deductible?) Suppose the company announces instead that the dividend is \$5. Should you care that the dividend is different from what you expected?\\
+
+On the date of the dividend payment, you would be obliged to pay the owner (the party with the long position) the dividend of \$3. This payment would be tax deductible as investment interest. If the dividend increases you should be concerned. Not only are you obliged to make a higher payment to the owner, increasing dividends will likely mean an increase in the value of the stock. Hence you will be less likely to profit from the purchase at the end of the short position. This effect is less likely to occur with stock dividends, as the increase in quantity of stock dilutes the value of the stock.
+
+\problem{1.10} Short interest is a measure of the aggregate short positions on a stock. Check online brokerage or other financial service for the short interest on several stocks of your choice. Can you guess which stocks have high short interest and which have low? Is it theoretically possible for short interest to exceed 100\% of shares outstanding?\\
+
+Here are some short interest ratios I looked up:
+\begin{center}
+\begin{tabular}{l||c}
+Stock & Short Ratio \\ \hline\hline
+Disney & 16\%\\
+Facebook & 18\%\\
+Tesla & 9\%\\
+Dillard's & 46\%
+\end{tabular}
+\end{center}
+
+It seems as though low short interest would indicate that investors think the market is undervaluing the stock, and they anticipate a price increase. On the other hand, high short interest would indicate that investors think the market is undervaluing the stock, and they anticipate a price decrease. Short interest cannot exceed 100\%, as this would indicate that more than 100\% of the stock shares are being shorted, which is impossible.
+
+\problem{1.11} Suppose that you go to a bank and borrow \$100. You promise to repay the loan in 90 days for \$102. Explain this transaction using the terminology of short-sales.\\
+
+You are taking a short position on the money the bank is lending you. Your hope is that the \$100 the bank lends you now will be worth more than \$102 in the future, thus giving you a profit.
+
+\problem{1.12} Suppose your bank's loan officer tells you that if you take out a mortgage (i.e., you borrow money to buy a house), you will be permitted to borrow no more than 80\% of the value of the house. Describe this transaction using the terminology of short-sales.\\
+
+You are short-selling the house. Your hope is that by the time you sell the house, the value of the house has exceeded the amount of money that you pay back to the bank.
+
+\problem{1.13} Pick a derivatives exchange such as CME group, Eurex, or the Chicago Board Options Exchange. Go to that exchange's website and try to determine the following:
+\begin{enumerate}[(a)]
+\item What products the exchange trades.
+\item The trading volume in the various products.
+\item The notional value traded.
+\end{enumerate}
+What do you predict would happen to these measures if the notional value of a popular contract were cut in half? (For example, instead of an option being based on 100 shares of stock, suppose it were based on 50 shares of stock.)
+
+For this exercise I chose the CME Group. Their website lists the following products, listed with corresponding trade volumes and notional values.
+\begin{center}
+\begin{tabular}{l||cc}
+Product & Volume & Notional Value (Billions \$) \\ \hline \hline
+Agriculture & 1,536,636 & 34.7 \\
+Energy & 1,605,745 & 60.6 \\
+Equity Index & 4,143,266 & 561.7 \\
+FX (Foreign Exchange) & 1,005,678 & 72 \\
+Interest Rates & 9,858,614 & 2300 \\
+Metals & 817,097 & 95.8
+\end{tabular}
+\end{center}
+
+If the notional value of a popular contract were cut in half, I would expect the trade volume to increase (double, for that particular contract), but for the notional value to remain unchanged.
+
+\problem{1.14} Consider the widget exchange. Suppose that each widget contract has a market value of \$0 and a notional value of \$100. There are three traders, A, B, and C. Over one day, the following trades occur:
+\begin{itemize}
+\item A long, B short, 5 contracts.
+\item A long, C short, 15 contracts.
+\item B long, C short, 10 contracts.
+\item C long, A short, 20 contracts.
+\end{itemize}
+
+\begin{enumerate}[(a)]
+\item What is each trader's net position in the contract at the end of the day? (Calculate long positions minus short positions.)
+
+At the end of the day A has 0 contracts, B has 5 contracts, and C has -5 contracts.
+
+\item What are trading volume, open interest, and the notional value of trading volume and open interest? (Calculate open interest as the sum of the net \emph{long positions}, from your previous answer.)
+
+The trading volume is 50 contracts, the open interest is 5 contracts, the notional value of the trading volume is \$5,000, and the notional value of the open interest is \$500.
+
+\item How would your answers have been different if there were an additional trade: C long, B short, 5 contracts?
+
+This would increase the trading volume to 55 contracts and the notional value of the trading volume to \$5,500. The open interest would decrease to 0 contracts with a notional value of \$0.
+
+\item How would you expect the measures in part (b) to be different if each contract had a notional value of \$20?
+
+I would expect the trading volume to increase to 250 contracts and the open interest to increase to 25 contracts, however, the notional values of trading volume and open interest would not change. This is because if contracts were worth a fifth as much, then the traders would trade five times as much.
+\end{enumerate}
+\end{document}

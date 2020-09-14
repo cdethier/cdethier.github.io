@@ -1,0 +1,397 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb, enumerate, amsmath, amsthm}
+\usepackage{graphics}
+\usepackage{pgfplots}
+\usepackage{txfonts}
+\usepackage{textcomp}
+
+\newcommand{\problem}[1]{\bigskip \noindent \textbf{Problem #1}}
+\newcommand{\Call}{\text{Call}}
+\newcommand{\Put}{\text{Put}}
+\newcommand{\PV}{\text{PV}}
+\newcommand{\FV}{\text{FV}}
+\newcommand{\Straddle}{\text{Straddle}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}{Question}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{example*}{Example}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{nonexample*}{Non-Example}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{8.7in}
+\title{McDonald Exercises, Chapter 5}
+\author{Christophe Dethier}
+\date{$\substack{\text{Created September 7, 2020}\\\text{Last edited \today}}$}
+\begin{document}
+\bigskip
+\maketitle
+
+Please contact me at christophehldethier@gmail.com with any questions, comments, or corrections.\\
+
+\textbf{Problem 5.15 is not complete!}
+
+\problem{5.1} Construct Table 5.1 from the perspective of a seller, providing a descriptive name for each of the transactions.\\
+
+\begin{center}
+\begin{tabular}{l||ccc}
+Description & Receive Payment at Time & Give Security at Time & Payment \\ \hline \hline
+Outright Sale & 0 & 0 & $S_0$\\
+Loan Sale & $T$ & 0 & $S_0e^{rT}$\\
+Prepaid Short Forward & 0 & $T$ & $S_0e^{-\delta T}$\\
+Short Forward & $T$ & $T$ & $S_0 e^{(r-\delta)T}$
+\end{tabular}
+\end{center}
+
+\problem{5.2} A \$50 stock pays a \$1 dividend every 3 months, with the first dividend coming 3 months from today. The continuously compounding risk-free rate is 6\%.
+\begin{enumerate}[(a)]
+\item What is the price of a prepaid forward contract that expires 1 year from today, immediately after the fourth-quarter dividend?\\
+
+The current price of that prepaid forward contract will be
+\[
+F_{0,1}^{P} = S_0 - \sum_{i=1}^4 \PV_{0,0.25i}(D_i) = 100 - \sum_{i=1}^4 e^{-0.015i} =\$46.147.
+\]
+
+\item What is the price of a forward contract that expires at the same time?\\
+
+The price of a forward contract that expires at the same time is
+\[
+46.147 \cdot e^{0.06} = \$49.001.
+\]
+\end{enumerate}
+
+\problem{5.3} A \$50 stock pays an 8\% continuous dividend. The continuously compounded risk-free rate is 6\%.
+\begin{enumerate}[(a)]
+\item What is the price of a prepaid forward contract that expires 1 year from today?\\
+
+The price of that prepaid forward contract is
+\[
+F_{0,1}^P = S_0 e^{-\delta \cdot 1} = 50e^{-0.08} = \$46.156.
+\]
+
+\item What is the price of a forward contract that expires at the same time?\\
+
+The price of that forward contract is
+\[
+46.156 \cdot e^{0.06} = \$49.010.
+\]
+\end{enumerate}
+
+\problem{5.4} Suppose the stock price is \$35 and the continuously compounded interest rate is 5\%.
+
+\begin{enumerate}[(a)]
+\item What is the 6-month forward price, assuming dividends are zero?\\
+
+The 6-month forward price with no dividends is
+\[
+35e^{0.05\cdot 0.5} = \$35.886.
+\]
+
+\item If the 6-month forward price is \$35.50, what is the annualized forward premium?\\
+
+The annualized forward premium is
+\[
+\frac{1}{0.5} \ln\left(\frac{F_{0,0.5}}{S_0}\right) = 2\ln\left(\frac{35.50}{35}\right) = 2.837\%.
+\]
+
+\item If the forward price is \$35.50, what is the annualized continuous dividend yield?\\
+
+The annualized continuous dividend yield can be solved for using the 6-month forward price:
+\begin{align*}
+35.50 &= 35 e^{(0.05 - \delta)0.5}\\
+1.0143 &= e^{(0.05 - \delta)0.5}\\
+0.01418 &= (0.05 - \delta)0.5\\
+0.02836 &= 0.05 - \delta\\
+0.02163 &= \delta.
+\end{align*}
+So we see that the annualized continuous dividend yield is 2.163\%. Interestingly, this is ends up being the annualized forward premium subtracted from the continuous annualized interest rate.
+\end{enumerate}
+
+\problem{5.5} Suppose you are a market-maker in S\&R index forward contracts. The S\&R index spot price is 1100, the risk-free rate is 5\%, and the dividend yield on the index is 0.
+\begin{enumerate}[(a)]
+\item What is the no-arbitrage forward price for delivery in 9 months?\\
+
+The no-arbitrage forward price for delivery in 9 months is
+\[
+1100 e^{0.05\cdot 0.75} = \$1142.033.
+\]
+
+\item Suppose a customer wishes to enter a short index futures position. If you take the opposite position, demonstrate how you would hedge your resulting long position using the index and borrowing or lending.\\
+
+You should pursue the method in Table 5.7 of shorting a synthetic forward. To do this, short a tailed position in stock, receiving \$1100. Then lend the immediate revenue of \$1100 from the short. This way you owe the value of the index in 9-months and receive $1100e^{0.05\cdot 0.75} = \$1142.033$, which has the same cash flows as a short forward position.
+
+\item Suppose a customer wishes to enter a long index futures position. If you take the opposite position, demonstrate how you would hedge your resulting short position using the index and borrowing or lending.\\
+
+You should pursue the method in Table 5.6 of a long synthetic forward. To do this, buy a tailed position in stock, paying \$1100. Pay for this purchase by borrowing \$1100. Then in 9-months you owe $1100 e^{0.05 \cdot 0.75} = \$1142.033$ and receive the value of the index, which has the same cash flows as a long forward position.
+\end{enumerate}
+
+\problem{5.6} Repeat the previous problem, assuming that the dividend yield is 1.5\%.
+\begin{enumerate}[(a)]
+\item What is the no-arbitrage forward price for delivery in 9 months?\\
+
+The no-arbitrage forward price for delivery in 9 months is
+\[
+1100 e^{(0.05-0.015)\cdot 0.75} = \$1129.257.
+\]
+
+\item Suppose a customer wishes to enter a short index futures position. If you take the opposite position, demonstrate how you would hedge your resulting long position using the index and borrowing or lending.\\
+
+You should pursue the method in Table 5.7 of shorting a synthetic forward. To do this, short a tailed position in stock for \$1087.694. Then lend the immediate revenue from the short. This way you owe the value of the index in 9-months and receive $1100e^{(0.05-0.015)\cdot 0.75} = \$1129.257$, which has the same cash flows as a short forward position.
+
+\item Suppose a customer wishes to enter a long index futures position. If you take the opposite position, demonstrate how you would hedge your resulting short position using the index and borrowing or lending.\\
+
+You should pursue the method in Table 5.6 of a long synthetic forward. To do this, buy a tailed position in stock by paying \$1087.694. Pay for this purchase with a loan. Then in 9-months you owe $1100 e^{(0.05-0.015) \cdot 0.75} = \$1129.257$ and receive the value of the index, which are the same cash flows as a long forward position.
+\end{enumerate}
+
+\problem{5.7} The S\&R spot price is 1100, the risk-free rate is 5\%, and the dividend yield on the index is 0.
+\begin{enumerate}[(a)]
+\item Suppose you observe a 6-month forward price of 1135. What arbitrage would you undertake?\\
+
+The 6-month forward price should be
+\[
+1100 e^{0.05\cdot 0.5} = \$1127.847,
+\]
+as this is the price of the synthetic forward. Since this is lower than the quoted rate, I would short the forward contract and purchase the a long synthetic forward contract.
+
+\item Suppose you observe a 6-month forward price of 1115. What arbitrage would you undertake?\\
+
+The 6-month forward price should be \$1127.847, computed in the previous part. Since this is the price of a synthetic forward contract, I would purchase the forward contract and short the synthetic forward contract.
+
+\end{enumerate}
+
+\problem{5.8} The S\&R index spot price is 1100, the risk-free rate is 5\%, and the continuous dividend yield on the index is 2\%.
+\begin{enumerate}[(a)]
+\item Suppose you observe a 6-month forward price of 1120. What arbitrage would you undertake?\\\
+
+The 6-month forward price should be
+\[
+1100 e^{(0.05-0.02)0.5} = \$1116.662,
+\]
+as this is the price of the synthetic forward contract. Because this is lower than the quoted rate, I would short the forward contract and purchase synthetic forward contracts.
+
+\item Suppose you observe a 6-month forward price of 1110. What arbitrage would you undertake?\\
+
+The 6-month forward price should be \$1116.662, computed in the previous problem. Since this is higher than the price of the synthetic forward contract, I would short the synthetic forward contract and purchase forward contracts.
+\end{enumerate}
+
+\problem{5.9} Suppose that 10 years from now it becomes possible for money managers to engage in time travel. In particular, suppose that a money manager could travel to January 1981, when the 1-year Treasury-bill rate was 12.5\%.
+\begin{enumerate}[(a)]
+\item If time travel were costless, what riskless arbitrage strategy could a money manager undertake by traveling back and forth between January 1981 and January 1982?\\
+
+The money manager could purchase Treasury bills in January 1981 in cash, then travel forward in time to January 1982 to redeem the Treasury bills in cash, then travel back in time to January 1981 and purchase Treasury bills in cash.
+
+\item If money managers undertook this strategy, what would you expect to happen to interest rates in 1981?\\
+
+I would expect interest rates to drop sharply to 0, because suddenly the demand for Treasury bills would be infinite.
+
+\item Since interest rates \emph{were} 12.5\% in January 1981, what can you conclude about whether costless time travel will every be possible?\\
+
+Well, I suppose it won't be possible because interest rates in January 1981 appear to have been positive. Unless of course we're operating under the separate time-line theory of time travel, in which case we could just be living out the original time-line.
+\end{enumerate}
+
+\problem{5.10} The S\&R index spot price is 1100 and the continuously compounded risk-free rate is 5\%. You observe a 9-month forward price of 1129.257.
+\begin{enumerate}[(a)]
+\item What dividend yield is implied by this forward price?\\
+
+We can solve for the dividend yield using our expression for the forward price:
+\begin{align*}
+1100e^{(0.05-\delta)0.75} &= 1129.257\\
+e^{(0.05-\delta)0.75} &= 1.0266\\
+(0.05-\delta)0.75 &= 0.02625\\
+0.05 - \delta &= 0.03500\\
+\delta &= 0.0150.
+\end{align*}
+So the dividend yield is implied to be 1.5\%.
+
+\item Suppose you believe the dividend yield over the next 9 months will be only 0.5\%. What arbitrage would you undertake?\\
+
+This adjusted dividend yield would give you a synthetic forward price of
+\[
+1100e^{(0.05-0.005)0.75} = \$1137.758,
+\]
+so I would short synthetic forward contracts and purchase forward contracts.
+
+\item Suppose you believe the dividend yield will be 3\% over the next 9 months. What arbitrage would you undertake?
+
+This adjusted dividend yield would give you a synthetic forward price of
+\[
+1100e^{(0.05-0.03)0.75} = \$1116.624,
+\]
+so I would short forward contracts and purchase synthetic forward contracts.
+\end{enumerate}
+
+\problem{5.11} Suppose the S\&P 500 index futures priced is currently 1200. You wish to purchase four futures contracts on margin.
+\begin{enumerate}[(a)]
+\item What is the notional value of your position?\\
+
+The notional value of the four contracts would be $4 \cdot 250 \cdot 1200 = \$1,200,000$. 
+
+\item Assuming a 10\% initial margin, what is the value of the initial margin?\\
+
+The value of the initial margin would be \$120,000.
+\end{enumerate}
+
+\problem{5.12} Suppose the S\&P 500 index is currently 950 and the initial margin is 10\%. You wish to enter into 10 S\&P 500 futures contracts.
+\begin{enumerate}[(a)]
+\item What is the notional value of your position? What is the margin?\\
+
+The notional value is $10 \cdot 250 \cdot 950 = \$2,375,000$. The initial margin of that is 10\% of that, so \$237,500.
+
+\item Suppose you earn a continuously compounded rate of 6\% on your margin balance, your position is marked to market \emph{weekly}, and the maintenance margin is 80\% of the initial margin. What is the greatest S\&P 500 index futures price 1 week from today at which you will receive a margin call?\\
+
+The maximum margin that would receive a margin call would be \$190,000. This would require that the notional value drop by
+\[
+237500 e^{0.06/52} - 190000 = \$47,774.197
+\]
+to get the necessary margin. So you would require an index price of
+\[
+\frac{2,375,000 - 47,774.197}{10\cdot 250} = 930.890
+\]
+to receive a margin call.
+\end{enumerate}
+
+\problem{5.13} Verify that going long a forward contract and lending the present value of the forward price creates a payoff of one share of stock when
+\begin{enumerate}[(a)]
+\item The stock pays no dividends.\\
+
+Suppose that the interest rate compounded continuously is $r$, the value of the stock is currently $S_0$, the expiration date is in $T$ years, and the value of the stock after $T$ years is $S_T$. Then the the forward price is $S_0 e^{rT}$ and the present value of the forward price is $S_0$. Going long the forward contract and lending $S_0$ this amount creates a payoff of
+\[
+S_T - S_0e^{rT} + S_0e^{rT} = S_T
+\]
+
+\item The stock pays discrete dividends.\\
+
+Suppose there are dividend payments $D_{t_1},\ldots,D_{t_n}$, and all other notation is the same as the previous part. The forward price is then
+\[
+\FV\left(S_0 - \sum_{i=1}^n \PV\left(D_{t_i}\right)\right) = S_0e^{rT} - \sum_{i=1}^n \FV\left( D_{t_i}\right),
+\]
+and the present value of the forward price is then
+\[
+S_0 - \sum_{i=1}^n \PV\left(D_{t_i}\right).
+\]
+Going long the forward contract and lending the present value of the forward price gives you a payoff of
+\[
+S_T - S_0e^{rT} + \sum_{i=1}^n D_{t_i} + S_0e^{rT} - \sum_{i=1}^n \FV\left( D_{t_i} \right) = S_T.
+\]
+
+\item The stock pays continuous dividends.\\
+
+Suppose that the annualized continuously compounded dividend rate is $\delta$, and all other notation is the same as in part (a). Then the forward price is $S_0e^{(r - \delta)T}$, and the present value of the forward price is $S_0e^{-\delta T}$. So if we go long the forward contract and loan the present value of the forward price, then we create a payoff of
+\[
+S_T - S_0e^{(r - \delta)T} + S_0e^{(r - \delta)T} = S_T.
+\]
+\end{enumerate}
+
+\problem{5.14} Verify that when there are no transaction costs, the lower no-arbitrage bound is given by equation (5.12).\\
+
+Suppose that the stock and forward have bid and ask prices of $S^b < S^a$ and $F^b < F^a$, a trader faces a cost of $k$ of transacting in the stock or forward, and the interest rates for borrowing and lending are $r^b > r^{\ell}$. An arbitrageur believing the observed ask forward price $F^a$, is too low will undertake the transactions in Table 5.7, buying the forward and lending the proceeds from shorting the stock. For simplicity we assume that the stock gives no dividends. Purchasing the forward has a profit of $S_T - F^a - ke^{r^{\ell}T}$, while shorting the stock has a profit of $(S^b-k)e^{r^{\ell}T}- S_T$, for a total profit of
+\[
+S_T - F^a - ke^{r^{\ell}T} + (S^b - k)e^{r^{\ell}T} - S_T = (S^b - 2k)e^{r^{\ell}T} - F^a
+\]
+For this payoff to be positive, we must have
+\[
+F^a < F^- \coloneqq (S^b - 2k)e^{r^{\ell}T}.
+\]
+
+\problem{5.15} Suppose the S\&R index is 800, and that the dividend yield is 0. You are an arbitrageur with a continuously compounded borrowing rate of 5.5\% and a continuously compounded lending rate of 5\%. Assume that there is 1 year to maturity.
+\begin{enumerate}[(a)]
+\item Supposing that there are no transaction fees, show that a cash-and-carry arbitrage is not profitable if the forward price is less than 845.23, and that a reverse cash-and-carry arbitrage is not profitable if the forward price is greater than 841.02.\\
+
+Computing the bounds in equations (5.11) and (5.12), we see that
+\[
+F^+ = 800e^{0.055\cdot1} = 845.232 \quad \quad \text{ and } \quad \quad F^- = 800e^{0.05\cdot 1} = 841.017,
+\]
+so the arbitrage is not profitable unless the forward price is less than \$841.017 or the forward price is greater than \$845.232.
+
+\item Now suppose there is a \$1 transaction fee, paid at time 0, for going either long or short the forward contract. Show that the upper and lower no-arbitrage bounds now become 846.29 and 839.97.\\
+
+Computing the bounds in equations (5.11) and (5.12), we see that
+\[
+F^+ = (800 + 1)e^{0.055\cdot 1} = 846.289 \quad \quad \text{ and } \quad \quad F^- = (800 - 1)e^{0.05 \cdot 1} = 839.966,
+\]
+so the arbitrage is not profitable unless the forward price is less than \$839.966 or the forward price is greater than \$846.289.
+
+\item Now suppose that in addition to the fee for the forward contract, there is also a \$2.40 fee for buying or selling the index. Suppose the contract is settled by delivery of the index, so that this fee is paid only at time 0. What are the new upper and lower no-arbitrage bounds?\\
+
+Once again computing the bounds in equations (5.11) and (5.12), we see that
+\[
+F^+ = (800 + 3.4)e^{0.055} = 848.825 \quad \quad \text{ and } \quad \quad (800 - 3.4)e^{0.05} = 837.443,
+\]
+so now the arbitrage is not possible unless the forward price is less than \$837.443 or greater than \$848.825.
+
+\item Make the same assumptions as in the previous part, except assume that the contract is cash-settled. This means that it is necessary to pay the stock index transaction fee (but not the forward fee) at both times 0 and 1. What are the new no-arbitrage bounds?\\
+
+Computing the bounds in equations (5.11) and (5.12), we see that
+\[
+F^+ = (800 + 4.8)e^{0.055} = 850.304 \quad \quad \text{ and } \quad \quad F^- = (800 - 4.8) e^{0.05} = 835.971,
+\]
+so now the arbitrage is not possible unless the forward price is less than \$835.971 or greater than \$850.304.
+
+\item Now suppose that transactions in the index have a fee of 0.3\% of the value of the index (this is for both purchases and sales). Transactions in the forward contract still have a fixed fee of \$1 per unit of the index at time 0. Suppose the contract is cash-settled so that when you do a cash-and-carry or reverse-cash-and-carry you pay the index transaction fee both at time 1 and time 0. What are the new upper and lower no-arbitrage bounds? Compare your answer to that in the previous part. (\emph{Hint:} To handle the time 1 transaction fee, you may want to consider tailing the stock position.)\\
+\end{enumerate}
+
+\problem{5.16} Suppose the S\&P 500 currently has a level of 875. The continuously compounded return on a 1-year T-bill is 4.75\%. You wish to hedge an \$800,000 portfolio that has a beta of 1.1 and a correlation of 1.0 with the S\&P 500.
+\begin{enumerate}[(a)]
+\item What is the 1-year futures price for the S\&P 500 assuming no dividends?\\
+
+The 1-year futures price for the S\&P 500 is
+\[
+250 \cdot 875 \cdot e^{0.0475} = 229,391.126.
+\]
+
+\item How many S\&P futures contracts should you short to hedge your portfolio? What return do you expect on the hedged portfolio?\\
+
+Dividing the size of our portfolio by the value of one prepaid forward contract and multiplying by our $\beta$ to obtain
+\[
+1.1\frac{800,000}{250 \cdot 875} = 4.022857,
+\]
+the number of futures contracts we should short. The return we expect on this is 4.75\% compounded continuously.
+\end{enumerate}
+
+\problem{5.17} Suppose you are selecting a futures contract with which to hedge a portfolio. You have a choice of six contracts, each of which has the same variability, but with correlations of -0.95, -0.75, -0.50, 0, 0.25, and 0.85. Rank the futures contracts with respect to basis risk, from highest to lowest basis risk.\\
+
+Assuming the same variability and notional value for every futures contract, the hedged variability increases as the square of the correlation coefficient decreases. So ranked by risk from highest to lowest, our list becomes $0,0.25, -0.50,-0.75,0.85,-0.95$.
+
+\problem{5.18} Suppose the current exchange rate between Germany and Japan is 0.02 \texteuro / \textyen. The euro-dominated annual continuously compounded risk-free rate is 4\% and the yen-dominated annual continuous compounded risk-free rate is 1\%. What are the 6-month euro/yen and yen/euro forward prices?\\
+
+We use equation (5.18) to compute these forward rates. The 6-month euro/yen forward price is
+\[
+F_{0,0.5} = 0.02e^{(0.04 - 0.01)0.5} = 0.0203,
+\]
+while the 6-month yen/euro forward price is
+\[
+F_{0,0.5} = 50e^{(0.01-0.04)0.5} = 49.256.
+\]
+
+\problem{5.19} Suppose the spot \textdollar / \textyen ~exchange rate is 0.008, the 1-year continuously compounded dollar-dominated rate is 5\% and the 1-year continuously compounded yen-dominated rate is 1\%. Suppose the 1-year forward exchange rate is 0.0084. Explain precisely the transactions you could use (being careful about currency of denomination) to make money with zero initial investment and no risk. How much do you make per yen? Repeat for a forward exchange rate of 0.0083.\\
+
+We can use equation (5.18) to compute what the 1-year forward rate should be,
+\[
+0.008e^{0.05-0.01} = 0.008326.
+\]
+Let's assume the actual 1-year forward rate is 0.0084 dollars/yen. First we use the forward contract to lock in an exchange rate of 0.0084 in 1-year. We borrow dollars, convert to yen at the spot rate of 125 yen/dollar, and invest in a yen-dominated bill for 1 year. Doing this results in $125e^{0.01} = 126.236$ yen after 1 year for every 1 dollar. Then we convert back to dollars at a rate of 0.0084 dollars/yen (locked in by shorting the forward contract) to obtain 1.0604 dollars for every 1 dollar we started with. We owe 1.0513 per dollar on the loan, so we make a profit of 0.0091 dollars for every 1 dollar we started with.
+
+Conversely, let's assume the actual 1-year forward rate is 0.0083 dollars/yen. First we use the forward contract to lock in an exchange rate of 0.0083 in 1-year. We borrow yen, convert to dollars at the spot rate of 0.008 dollar/yen and invest in a dollar-dominated bill for 1 year. Doing thisw results in $0.008e^{0.05} = 0.0084102$ dollars for every 1 yen. Then we convert back to yen at a rate of 120.48193 dollar/yen (locked in using the forward contract) to obtain 1.01328 yen for every yen we started with. We owe 1.01005 yen per original yen, giving us a profit of 0.0032298 yen for every 1 borrowed yen.
+
+\problem{5.20} Suppose we wish to borrow \$10 million for 91 days beginning next June, and that the quoted Eurodollar futures price is 93.23.
+\begin{enumerate}[(a)]
+\item What 3-month LIBOR rate is implied by this price?\\
+
+This implies an annualized LIBOR rate of $100 - 93.23 = 6.77\%$, or a 3-month LIBOR rate of 1.9425\%.\\
+
+\item How much will be needed to repay the loan?\\
+
+To repay the loan you will need $1000000\cdot 1.019425 = \$1,019,425.00$ to repay the loan.
+\end{enumerate}
+\end{document}

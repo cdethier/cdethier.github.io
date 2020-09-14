@@ -1,0 +1,397 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb, enumerate, amsmath, amsthm}
+\usepackage{graphics}
+\usepackage{pgfplots}
+\usepackage{txfonts}
+\usepackage{textcomp}
+
+\newcommand{\problem}[1]{\bigskip \noindent \textbf{Problem #1}}
+\newcommand{\Call}{\text{Call}}
+\newcommand{\Put}{\text{Put}}
+\newcommand{\PV}{\text{PV}}
+\newcommand{\FV}{\text{FV}}
+\newcommand{\Straddle}{\text{Straddle}}
+\newcommand{\euro}{\text{\texteuro}}
+\newcommand{\y}{\text{\textyen}}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}{Question}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{example*}{Example}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{nonexample*}{Non-Example}
+
+
+\setlength{\oddsidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\headheight}{0in}
+\setlength{\headsep}{0in}
+\setlength{\textheight}{8.7in}
+\title{McDonald Exercises, Chapter 9}
+\author{Christophe Dethier}
+\date{$\substack{\text{Created September 8, 2020}\\\text{Last edited \today}}$}
+\begin{document}
+\bigskip
+\maketitle
+
+Please contact me at christophehldethier@gmail.com with any questions, comments, or corrections.
+
+\problem{9.1} A stock currently sells for \$32.00. A 6-month call option with a strike of \$35.00 has a premium of \$2.27. Assuming a 4\% continuously compounded risk-free rate and a 6\% continuous dividend yield, what is the price of the associated put option?\\
+
+According to put-call parity, we have
+\begin{align*}
+\Call(K,T) - \Put(K,T) &=S_0 - \PV(\text{Div})- e^{-rT}KS_0 \\
+\Call(35,0.5) - \Put(35,0.5) &= 32e^{-0.03}- 35e^{-0.02}\\
+2.27 - \Put(35,0.5) &=  31.054-34.307\\
+\Put(35,0.5) &= 5.523.
+\end{align*}
+So the price of the associated put option is \$5.523.
+
+\problem{9.2} A stock currently sells for \$32.00. A 6-month call option with a strike of \$30.00 has a premium of \$4.29, and a 6-month put with the same strike has a premium of \$2.64. Assume a 4\% continuously compounded risk-free rate. What is the present value of the dividends payable over the next 6 months?\\
+
+According to put-call parity, we have
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= S_0 - \PV(\text{Div}) - Ke^{-rT}\\
+\Call(30,0.5) - \Put(30,0.5) &= 32 - \PV(\text{Div}) - 30e^{-0.02}\\
+4.29 - 2.64 &= 32 - \PV(\text{Div}) - 29.406\\
+\PV(\text{Div}) &= 0.944.
+\end{align*}
+So the present value of dividends over the next 6 months is \$0.944.
+
+\problem{9.3} Suppose the S\&R index is 800, the continuously compounded risk-free rate is 5\%, and the dividend yield is 0\%. A 1-year 815-strike European call costs \$75 and a 1-year 815-strike European put costs \$45. Consider the strategy of buying the stock, selling the 815-strike call, and buying the 815-strike put.
+\begin{enumerate}[(a)]
+\item What is the rate of return on this position held until the expiration of the options?\\
+
+The profit at expiration for the stock is given by $S_T - 800e^{0.05}$, the profit at expiration for the call is given by $75e^{0.05} - \max(0,S_T - 815)$, and the profit at expiration for the put is given by $\max(0,815-S_T) - 45e^{0.05}$. Hence the profit for the aggregate position is
+\[
+S_T- 841.017 + 31.538 + 815 - S_T = 5.521.
+\]
+So the return on this investment is always \$5.521. The total return is \$815 for a rate of return of 5.844\% on our initial \$770 investment, or a continuous compounding rate of 5.6796\% .
+
+\item What is the arbitrage implied by your answer to (a)?\\
+
+As this continuous rate of return is higher than the continuous interest rate, this aggregate position will yield a higher interest rate than lending the same amount of money. We can see this in our previous calculation. This investment strategy is risk-less and always makes a profit of \$5.521 over lending our initial investment. So we should borrow money at 5\% compounded continuously and purchase this position.
+
+\item What difference between the call and put prices would eliminate the arbitrage?\\
+
+We can calculate the no-arbitrage price difference using put-call parity,
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= S_0 - Ke^{-rT}\\
+\Call(815,1) - \Put(815,1) &= 800 - 815e^{-0.05} \\
+\Call(815,1) - \Put(815,1) &= 24.748.
+\end{align*}
+So the price difference should be \$24.748 to avoid this particular arbitrage.
+
+\item What difference between the call and put prices eliminates arbitrage for strike prices of \$780, \$800, \$820, and \$840?\\
+
+Using the same method we calculated the following no arbitrage differences:
+\begin{align*}
+\Call(780,1) - \Put(780,1) &= \$58.041\\
+\Call(800,1) - \Put(800,1) &= \$39.016\\
+\Call(820,1) - \Put(820,1) &= \$19.992\\
+\Call(840,1) - \Put(840,1) &= \$0.967.
+\end{align*}
+\end{enumerate}
+
+\problem{9.4} Suppose the exchange rate is 0.95 \textdollar / \texteuro, the euro-dominated continuously compounded interest rate is 4\%, the dollar-dominated continuously compounded interest rate is 6\%, and the price of a 1-year 0.93-strike European call on the euro is \$0.0571. What is the price of a 0.93-strike European put?\\
+
+According to put-call parity for currencies, we have
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= x_0 e^{-r_{\text{\texteuro}}T} - Ke^{-rT}\\
+\Call(0.93,1) - \Put(0.93,1) &= 0.95 e^{-0.04} - 0.93 e^{-0.06}\\
+0.0571 - \Put(0.93,1) &= 0.9128 - 0.8758\\
+\Put(0.93,1) &= 0.0201.
+\end{align*}
+So the price of this put is \$0.0201.
+
+\problem{9.5} The premium of a 100-strike yen-dominated put on the euro is \textyen 8.763. The current exchange rate is 95 \textyen / \texteuro. What is the strike of the corresponding euro-dominated yen call, and what is its premium?\\
+
+The strike price will be \texteuro 0.01. We can change between a yen-dominated put and a euro-dominated yen call using Equation (9.9):
+\begin{align*}
+C_{\euro}(x_0, K, T) &= x_0 K P_{\y}\left(\frac{1}{x_0}, \frac{1}{K}, T\right)\\
+C_{\euro}\left(\frac{1}{95}, \frac{1}{100}, T\right) &= \frac{1}{95} \frac{1}{100} P_{\y}(95,100,T)\\
+C_{\euro}\left(\frac{1}{95}, \frac{1}{100}, T\right) &= 0.0009224.
+\end{align*}
+So the premium will be \texteuro 0.0009224.
+
+\problem{9.6} The price of a 6-month dollar-dominated call option on the euro with a \$0.90 strike is \$0.0404. The price of an otherwise equivalent put option is \$0.0141. The annual continuously compounded dollar interest rate is 5\%.
+\begin{enumerate}[(a)]
+\item What is the 6-month dollar-euro forward price?\\
+
+According to put-call parity,
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= \PV(F_{0,T} - K)\\
+0.0404 - 0.0141 &= \PV(F_{0,0.5} - 0.9)\\
+\FV(0.0263) &= F_{0,0.5} - 0.9\\
+0.9270 &= F_{0,0.5}.
+\end{align*}
+So the price of the 6-month dollar-euro forward is \$0.9270.
+
+\item If the euro-dominated annual continuously compounded interest rate is 3.5\%, what is the spot exchange rate?\\
+
+According to put-call parity,
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= x_0e^{-r_{\euro}T} - Ke^{-rT}\\
+0.0404 - 0.0141 &= x_0 0.9827 - 0.8778\\
+0.9200 &= x_0.
+\end{align*}
+So the spot exchange rate is 0.0.9200 \$ / \texteuro.
+\end{enumerate}
+
+\problem{9.7} Suppoae the dollar-dominated interest rate is 5\%, the yen-dominated interest rate is 1\% (both rates are continuously compounded), the spot exchange rate is 0.009 \$ / \textyen, and the price of a dollar-dominated European call to buy one yen with 1 year to expiration and a strike price of \$0.009 is \$0.0006.
+\begin{enumerate}[(a)]
+\item What is the dollar-dominated European yen put price such that there is no arbitrage opportunity?\\
+
+To have no arbitrage opportunity, the dollar-dominated European yen put price must satisfy put-call parity:
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= x_0 e^{-r_{\y}T} - Ke^{-r_{\$}T}\\
+\Call(0.009,1) - \Put(0.009,1) &= 0.009e^{-0.01} - 0.009e^{-0.05}\\
+0.0006 - \Put(0.009,1) &= 0.008910 - 0.008561\\
+\Put(0.009,1) &= 0.000251.
+\end{align*}
+So the price of the put must be \$0.000251.
+
+\item Suppose that a dollar-denominated European yen put with a strike of \$0.009 has a premium of \$0.0004. Demonstrate the arbitrage.\\
+
+This price for the put is higher than the put from the previous problem that guarantees no arbitrage. So we should sell the put and purchase the call. This costs us a premium of \$0.0002. Then we borrow $e^{-0.01}$ yen and convert into dollars to get \$0.00891, which we invest at 5\% interest. In 1 year this borrow and lend combination means that we owe 1 yen and possess \$0.009367. Now regardless of the spot exchange rate in 1-year, our put-call options force us to buy 1 yen for the strike price of \$0.009. This cancels the debt. Overall, we make a profit of
+\[
+\$0.009367 - 0.0002e^{0.05} - 0.009 = \$0.0001568,
+\]
+for a return of 78\% on our investment of \$0.0002. Of course, we would want to pursue this at a higher scale.
+
+\item Now suppose that you are in Tokyo, trading options that are dominated in yen rather than dollars. If the price of a dollar-denominated at-the-money yen call in the United States is \$0.0006, what is the price of a yen-dominated at-the-money dollar call--an option giving the right to buy one dollar, denominated in yen--in Tokyo? What is the relationship of this answer to your answer to (a)? What is the price of the at-the-money dollar put?\\
+
+To answer the first question, we use Equation (9.9) to convert a put in one currency to a call in another currency:
+\begin{align*}
+C_{\y}(x_0, K, T) &= x_0 K P_{\$} \left(\frac{1}{x_0}, \frac{1}{K}, T\right)\\
+C_{\y}\left(\frac{1}{0.009}, \frac{1}{0.009}, 1\right) &= \frac{1}{0.009} \frac{1}{0.009} P_{\$}\left(0.009, 0.009, 1\right)\\
+C_{\y} \left(\frac{1}{0.009}, \frac{1}{0.009}, 1\right) &= 7.4074.
+\end{align*}
+So the price of the at-the-money yen-dominated call is \textyen 7.4074. We can then convert this to the price of the at-the-money yen-dominated put using put-call parity:
+\begin{align*}
+\Call(K,T) - \Put(K,T) &= x_0e^{-r_{\$}T} - Ke^{-r_{\y}T}\\
+7.4074 - \Put(K,T) &= 111.11e^{-0.05} - 111.11e^{-0.01}\\
+7.4074 - \Put(K,T) &= 105.69 - 110.00\\
+\Put(K,T) &= 11.7174.
+\end{align*}
+So the price of the at-the-money yen-dominated put is \textyen 11.7174.
+\end{enumerate}
+
+\problem{9.8} Suppose call and put prices are given by
+\begin{center}
+\begin{tabular}{l||cc}
+Strike & 50 & 55\\ \hline \hline
+Call premium & 9 & 10\\
+Put premium & 7 & 6
+\end{tabular}
+\end{center}
+What no-arbitrage property is violated? What spread position would you use to effect arbitrage? Demonstrate that the spread position is an arbitrage.\\
+
+The no-arbitrage property violated is (1), that if $K_1 < K_2$, then $C(K_1,T) \geq C(K_2,T)$ and $P(K_1,T) \leq P(K_1,T)$. Here we have $C(50,T) < C(55,T)$ and $P(50,T) > P(55,T)$. 
+
+To take advantage of this, we sell a 55-strike call and purchase a 50-strike call. This initial investment pays us 1. This gives us a bull spread which is always positive and can be engaged in an unlimited number of times because the upfront investment is negative. A similar bear spread is possible with puts.
+
+\problem{9.9} Suppose call and put prices are given by
+\begin{center}
+\begin{tabular}{l||cc}
+Strike & 50 & 55\\ \hline \hline
+Call premium & 16 & 10\\
+Put premium & 7 & 14
+\end{tabular}
+\end{center}
+What no-arbitrage property is violated? What spread position would you use to effect arbitrage? Demonstrate that the spread position is an arbitrage.\\
+
+Here property (2) is violated. We should have $C(50)-C(55) \leq 55-50$, but instead have $C(50)-C(55) > 55-50$. Similarly, we have $P(55)-P(50) \leq 55-50$ when in face we have $P(55) - P(50) > 55-50$.
+
+To take advantage of this, we sell the 50-strike call and purchase the 55-strike call. This investment pays us 6. However, the payoff from doing this is never below -5. If the price at time $T$ is less than 50, then neither strike activates. If the price at time $T$ is between 50 and 55, then we purchase at 50 for a loss of at most 5. If the price is greater than 55, then both calls activate and we lose exactly 5. Thus we have made an infinitely scalable zero-risk profit of 1. There is a similar arbitrage with the put prices.
+
+\problem{9.10} Suppose call and put prices are given by 
+\begin{center}
+\begin{tabular}{l||ccc}
+Strike & 50 & 55 & 60\\ \hline \hline
+Call premium & 18 & 14 & 9.50\\
+Put premium & 7 & 10.75 & 14.45
+\end{tabular}
+\end{center}
+Find the convexity violations. What spread would you use to effect arbitrage? Demonstrate that the spread position is an arbitrage.\\
+
+The following are convexity violations:
+\[
+\frac{C(50) - C(55)}{55 - 50} = 0.8 < 0.9 = \frac{C(55) - C(60)}{60 - 55}
+\]
+and
+\[
+\frac{P(55) - P(50)}{55- 50} = 0.75 > 0.74 = \frac{P(60) - P(55)}{60 - 55}.
+\]
+The inequalities in the center are both flipped from what they should be. To take advantage of this, we purchase a butterfly spread. We purchase the 50-strike and 60-strike calls and sell two 55-strike calls. This investment pays $-18 + 2\cdot14 - 9.5 = 0.5$. However, the returns are never negative. This is very easy to see looking at the payoff diagram for a butterfly spread. The returns are only negative because of the upfront cost of the premiums. There is a similar butterfly spread which takes advantage of puts.
+
+\problem{9.11} Suppose call and put prices are given by
+\begin{center}
+\begin{tabular}{l||ccc}
+Strike & 80 & 100 & 105\\ \hline \hline
+Call premium & 22 & 9 & 5\\
+Put premium & 4 & 21 & 24.80
+\end{tabular}
+\end{center}
+Find the convexity violations. What spread would you use to effect arbitrage? Demonstrate that the spread position is an arbitrage.\\
+
+The following are convexity violations:
+\[
+\frac{C(80) - C(100)}{100 - 80} = 0.65 < 0.8 = \frac{C(100) - C(105)}{105 - 100}
+\]
+and
+\[
+\frac{P(100) - P(80)}{100 - 80} = 0.85 > 0.76 = \frac{P(105) - P(100)}{105 - 100}.
+\]
+The arbitrage here comes in the form of an asymmetric butterfly spread. We purchase 0.2 of the 80-strike call and 0.8 of the 105-strike call and sell the 100-strike call. This gives us a non-negative payoff (butterfly spreads always do), but pays an upfront premium of $-0.2\cdot22 + 9 - 0.8\cdot5 = 0.6$. There is a similar asymmetric butterfly spread involving puts that has a positive premium.
+
+\problem{9.12} In each case identify the arbitrage and demonstrate how you would make money by creating a table showing your payoff.
+\begin{enumerate}[(a)]
+\item Consider two European options on the same stock with the same time to expiration. The 90-strike call costs \$10 and the 95-strike call costs \$4.\\
+
+The arbitrage payoff is given in the following table. The second column gives the initial investment. The third, fourth, and fifth columns give payoffs under different $S_T$ conditions.
+\begin{center}
+\begin{tabular}{l||cccc}
+Transaction & $t = 0$ & $S_T < 90$ & $90<S_T<95$ & $95 < S_T$ \\ \hline \hline
+Sell 90-strike & 10 & 0 & $90 - S_T$ & $90 - S_T$\\
+Buy 95-strike & -4 & 0 & 0 & $S_T - 95$\\
+Total & 6 & 0 & $90 - S_T > -5$ & $-5$.
+\end{tabular}
+\end{center}
+Since none of the entries in the bottom row are greater than -5 and we have 6 from the initial investment, this arbitrage always makes a profit of at least 1.
+
+\item Now suppose these options have 2 years to expiration and the continuously compounded interest rate is 10\%. The 90-strike call costs \$10 and the 95-strike call costs \$5.25. Show again that there is an arbitrage opportunity. (\emph{Hint:} It is important in this case that the options are European.)\\
+
+The arbitrage payoff is given in the following table. The second column gives the initial investment. The third, fourth, and fifth columns give payoffs under different $S_T$ conditions.
+\begin{center}
+\begin{tabular}{l||cccc}
+Transaction & $t = 0$ & $S_T < 90$ & $90 < S_T < 95$ & $95 < S_T$ \\ \hline \hline
+Sell 90-strike & 10 & 0 & $90-S_T$ & $90-S_T$\\
+Buy 95-strike & -5.25 & 0 & 0 & $S_T - 95$\\
+Invest proceeds & -4.75 & 5.802 & 5.802 & 5.802\\
+Total & 0 & 5.802 & $95.802 - S_T > 0.802$ & 0.802
+\end{tabular}
+\end{center}
+The bound $95.802 - S_T > 0.802$ is true when $S_T < 95$. Since all of the entries in the bottom row are greater than $0.802$, this arbitrage always makes a profit of at least 0.802.
+
+\item Suppose that a 90-strike European call sells for \$15, a 100-strike call sells for \$10, and a 105-strike call sells for \$6. Show how you could use an asymmetric butterfly to profit from this arbitrage opportunity.\\
+
+The arbitrage payoff is given in the following table. The second column gives the initial investment. The third, fourth, and fifth columns give payoffs under different $S_T$ conditions.
+\begin{center}
+\begin{tabular}{l||ccccc}
+Transaction & $t = 0$ & $S_T < 90$ & $90 < S_T < 100$ & $100 < S_T < 105$ & $S_T > 95$ \\ \hline \hline
+Buy 90-strike & -15 & 0 & $S_T - 90$ & $S_T - 90$ & $S_T - 90$\\
+Sell 3 of 100-strike & 30 & 0 & 0 & $300 - 3S_T$ & $300 - 3S_T$\\
+Buy 2 of 105-strike & -12 & 0 & 0 & 0 & $2S_T - 210$\\
+Total & 3 & 0 & $S_T - 90 > 0$ & $210 - 2S_T > 0$ & 0
+\end{tabular}
+\end{center}
+Since all of the entries in the bottom row are greater than 0, and we receive 3 from the initial investment, this arbitrage guarantees a profit of at least 3.
+\end{enumerate}
+
+\problem{9.13} Suppose the interest rate is 0\% and the stock of XYZ has a positive dividend yield. Is there any circumstance in which you would early-exercise an American XYZ call? Is there any circumstance in which you would early exercise an American XYZ put? Explain.\\
+
+Our main concern with early exercise American calls is losing out on interest payments. If there is no interest, then early exercise may be optimal. It's possible that holding the call as insurance protection may still be a benefit.
+
+The benefit of an early put exercise is to receive a payment earlier and make interest on it. For example, if the company goes bankrupt. However, we do not gain interest in this scenario. Ultimately it will depend on what we think will happen with the stock before the expiration date.
+
+\problem{9.14} In the following, suppose that neither stock pays a dividend.
+\begin{enumerate}[(a)]
+\item Suppose you have a call option that permits you to receive one share of Apple by giving up one share of AOL. In what circumstance might you early-exercise this call?\\
+
+There is a situation in which I would early-exercise this call. If AOL goes bankrupt then the call is equivalent to one share of Apple stock. I would sell the call or exercise the call and sell the stock under the same circumstances I would sell the Apple stock naturally. (If I thought the price of Apple stock would go down.)
+
+\item Suppose you have a put option that permits you to give up one share of Apple, receiving one share of AOL. In what circumstance might you early-exercise this put? Would there be a loss from not early-exercising if Apple had a zero stock price?\\
+
+This is the same situation but with Apple and AOL switched, so my previous comments apply.
+
+\item Now suppose that Apple is expected to pay a dividend. Which of the above answers will change? Why?\\
+
+Now the answer to (a) would change. This option is now equivalent to a call on Apple stock, which could have optimal early exercise with dividend payments, if the dividend payments exceed interest on the strike price (the AOL stock).
+
+The answer to (b) does not change. This is now a call on a stock with no dividends. If we early exercise then we forgo interest (dividends) from the Apple stock.
+\end{enumerate}
+
+\problem{9.15} The price of a non-dividend-paying stock is \$100 and the continuously compounded risk-free rate is 5\%. A 1-year European call option with a strike price of $\$100 \times e^{0.05 \times 1} = \$105.127$ has a premium of \$11.924. A $1\frac{1}{2}$ year European call option with a strike price of $\$100 \times e^{0.05 \times 1.5} = \$107.788$ has a premium of \$11.50. Demonstrate an arbitrage.\\
+
+The arbitrage here will result from the premium of the shorter call being larger than that of the longer call. Here is a payoff table for an arbitrage. The second column gives the initial investment required. The third, fourth, and fifth columns give the payoffs under various circumstances. It is assumed that all held cash is invested until the end of the 1.5 year period.
+
+\begin{center}
+\begin{tabular}{l||cccc}
+Transaction & $t = 0$ & $S_T < 105.127$ & $105.127 < S_T < 107.788$ & $107.788 < S_T$\\ \hline \hline
+Buy 1.5 year call & 11.50 & 0 & $S_Te^{0.025} - 107.788)$ & $S_Te^{0.025} - 107.788$ \\
+Short 1 year call & 11.924 & 0 & 0 & $107.788 - S_T$\\
+Totals & 0.424 & 0 & $S_Te^{0.025} - 107.788 > 0$ & $S_Te^{0.025} - S_T > 0$
+\end{tabular}
+\end{center}
+Since we have a non-negative payoff in every return in every situation and the initial investment pays us, we always make a profit of at least $0.424e^{0.075}$ from this arbitrage.
+
+\problem{9.16} Suppose that to buy either a call or a put option you pay the quoted ask price, denoted $C_a(K,T)$ and $P_a(K,T)$, and to sell an option you receive the bid, $C_b(K,T)$ and $P_b(K,T)$. Similarly, the ask and bid prices for the stock are $S_a$ and $S_b$. Finally, suppose you can borrow at the rate $r_H$ and lend at the rate $r_L$. The stock pays no dividend. Find the bounds between which you cannot profitable perform a parity arbitrage.\\
+
+There are two ways to perform a parity arbitrage. The first possibility is that you could buy the call, sell the put, short the stock, and invest the resulting inflow. This results in zero risk. We shorted the stock, but also purchased the synthetic stock. For this to not make a profit, the sums of all the investments must not be positive:
+\[
+-C_a(K,T) + P_b(K,T) + S_b - Ke^{r_LT} \leq 0.
+\]
+The second possibility is to sell the call, purchase the put, and purchase the stock on borrowed money. This again results in zero risk. For this to not be profitable, the sums of all the investments must not be positive:
+\[
+C_b(K,T) - P_a(K,T) - S_a + Ke^{r_HT} \leq 0.
+\]
+
+\problem{9.17} In this problem we consider whether parity is violated by any of the option prices in Table 9.1. Suppose that you buy at the ask and sell at the bid, and that your continuously compounded lending rate is 0.3\% and your borrowing rate is 0.4\%. Ignore transaction costs on the stock, for which the price is \$168.89. Assume that IBM is expected to pay a \$0.75 dividend on August 8, 2011. Options expire on the third Friday of the expiration month. For each strike and expiration, what is the cost if you:
+
+\begin{enumerate}[(a)]
+\item Buy the call, sell the put, short the stock, and lend the present value of the strike price plus dividend (where appropriate)?
+\item Sell the call, buy the put, and borrow the present value of the strike price plus dividend (where appropriate)?
+\end{enumerate}
+
+The costs for each of these are given for each strike and expiration in the table below:
+\begin{center}
+\begin{tabular}{ll||cc}
+Strike & Expiration & Position (a) Cost & Position (b) Cost \\ \hline \hline
+160 & June & -0.04 & -0.11\\
+165 & June & -0.04 & -0.13\\
+170 & June & -0.10 & -0.12\\
+175 & June & -0.08 & -0.14\\
+160 & October & -0.14 & -0.14\\
+165 & October & -0.18 & -0.04\\
+170 & October & -0.12 & -0.05\\
+175 & October & -0.12 & -0.06
+\end{tabular}
+\end{center}
+Since all of these values are negative, an arbitrage is not possible. (And this is without even taking into account the bid-ask spread of the stock itself.)
+
+\problem{9.18} Consider the June 165, 170, and 175 call option prices in Table 9.1.
+\begin{enumerate}[(a)]
+\item Does convexity hold if you buy a butterfly spread, buying at the ask price and selling at the bid?\\
+
+I will only check this for a butterfly spread consisting of only calls, Similar checks could be made for butterfly spreads constructed from puts or mixed butterfly spreads. Here is the convexity comparison:
+\[
+2C_b(170) = 6.40 \leq 7.68 = C_a(165) + C_a(175).
+\]
+Thus convexity holds.
+
+\item Does convexity hold if you sell a butterfly spread, buying at the ask price and selling at the bid?\\
+
+Again, I will only check this for butterfly spreads consisting of only calls. Here is the convexity comparison:
+\[
+2C_a(170) = 6.60 \leq 7.53 = C_b(165) + C_b(175).
+\]
+Thus convexity holds.
+
+\item Does convexity hold if you are a market-maker either buying or selling a butterfly, paying the bid and receiving the ask?\\
+
+Yes, convexity holds for the market-maker in both scenarios. Since our purchased butterfly is the market's written butterfly and vice-verse, one just needs to switch the two convexity comparisons to see that the market-maker also does not violate convexity.
+\end{enumerate}
+
+
+
+
+
+
+\end{document}
